@@ -1,0 +1,95 @@
+.el-menu
+{
+    z-index: 99;
+}
+
+.NavMenu-SRIC-Navlogo-style
+{
+    height: 50px;
+    margin: 5px 10px 5px 10px;
+}
+
+.NavMenu-right-div-style
+{
+    flex-grow: 1;
+}
+
+.NavMenu-el-readio
+{
+    font-weight: bold;
+}
+
+.NavMenu-menu-text-style
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.NavMenu-el-button-style
+{
+    margin-top: 10px;
+}
+
+.NavMenu-tooltip-p-style
+{
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.NavMenu-el-icon-style
+{
+    color: #000000;
+}
+
+.NavMenu-float-div-style
+{
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    position: absolute;
+    z-index: 100;
+}
+
+html.dark .el-menu
+{
+    background-color: rgba(0,0,0,0.64);
+}
+
+html.dark .NavMenu-menu-text-style
+{
+    color: #ffffff;
+}
+
+html.dark .NavMenu-el-icon-style
+{
+    color: #ffffff;
+}
+
+html.dark .NavMenu-float-div-style
+{
+    color: #ffffff;
+}
+
+.el-affix
+{
+    height: 0;
+}
+
+.el-radio__input.is-checked + .el-radio__label 
+{
+    color: #ff5f5f !important;
+}
+
+.el-radio__input.is-checked .el-radio__inner 
+{
+    background: #ff5f5f !important;
+    border-color: #ff5f5f !important;
+}
+
+.el-radio-group
+{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+}

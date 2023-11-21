@@ -1,0 +1,71 @@
+.AsideMessage-el-card-style
+{
+    width: 95%;
+    height: 100%;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: rgba(255,255,255,0.64);
+}
+
+.AsideMessage-message-div-style
+{
+    text-align: center;
+    margin-top: 32px;
+    color: #333333;
+}
+
+.AsideMessage-el-avater-style
+{
+    width: 100px;
+    height: 100px;
+}
+
+.AsideMessage-name-div-style
+{
+    margin-top: 10px;
+    margin-bottom: 32px;
+    font-weight: bold;
+}
+
+.AsideMessage-el-tag-style
+{
+    margin-left: 10px;
+}
+
+.AsideMessage-el-divider-style
+{
+    border: 0px;
+    background-color: #ff7f7f;
+    padding-top: 1px;
+}
+
+.AsideMessage-divider-icon-style
+{
+    color: #ff7f7f;
+    margin-top: 2px;
+}
+
+.el-divider__text
+{
+    background-color: rgba(255,255,255,0);
+}
+
+html.dark .AsideMessage-el-card-style
+{
+    background: rgba(0,0,0,0.64);
+}
+
+html.dark .AsideMessage-message-div-style
+{
+    color: #ffffff;
+}
+
+html.dark .AsideMessage-el-divider-style
+{
+    background-color: #ffffff;
+}
+
+html.dark .AsideMessage-divider-icon-style
+{
+    color: #ffffff;
+}

@@ -1,0 +1,82 @@
+.SafetyPage-image-anger-style
+{
+    height: 512px;
+    width: 512px;
+    position: absolute;
+    bottom: 64px;
+    transition: 0.5s left;
+}
+
+.SafetyPage-inside-card-style
+{
+    background: rgba(255,255,255,0);
+    border: solid;
+}
+
+.SafetyPage-inside-card-style .el-card__body
+{
+    background: rgba(255,255,255,0) !important;
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+.SafetyPage-outside-card-style
+{
+    height: 100%;
+    background: rgba(255,255,255,0.64);
+}
+
+.SafetyPage-outside-card-style .el-card__body
+{
+    background: url("@/assets/webp/background/yiyu.webp"),rgba(255,255,255,0);
+    background-size: 300px 270px;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SafetyPage-h3-style
+{
+    margin-left: 10px;
+    font-weight: bolder;
+}
+
+.SafetyPage-button-style
+{
+    width: 100%;
+    background-color: rgba(255,255,255,0.85);
+    font-weight: bold;
+    color: #ff6666;
+}
+
+.SafetyPage-back-button-style
+{
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: rgba(255,255,255,0.64);
+    font-weight: bold;
+    color: #ff6666;
+    position: absolute;
+    z-index: 99;
+}
+
+.SafetyPage-back-icon-style
+{
+    margin-right: 10px;
+}
+
+html.dark .SafetyPage-outside-card-style
+{
+    background-color: rgba(0,0,0,0.85);
+}
+
+html.dark .SafetyPage-button-style
+{
+    background-color: rgba(0,0,0,0.85);
+}
+
+html.dark .SafetyPage-back-button-style
+{
+    background-color: rgba(0,0,0,0.64);
+}
