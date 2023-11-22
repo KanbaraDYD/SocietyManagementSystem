@@ -11,7 +11,7 @@ const routes =
     [
       {
         name: 'index',
-        path: '/index',
+        path: '/',
         component: () => import('@/components/home/AppIndex'),
       },
       {

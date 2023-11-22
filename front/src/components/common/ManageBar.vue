@@ -26,7 +26,7 @@ export default
     {
         switchSetting()
         {
-            this.$router.push('/index')
+            this.$router.push('/')
         },
     },
 }
