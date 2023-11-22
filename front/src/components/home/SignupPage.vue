@@ -1,0 +1,412 @@
+<template>
+    <el-button
+        @click="clickBack"
+        color="#ff6666"
+        class="SafetyPage-back-button-style"
+        plain
+    >
+        <el-icon class="SafetyPage-back-icon-style"><ArrowLeftBold /></el-icon>
+        返回
+    </el-button>
+    <el-row>
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+            <div :style="paddingTop">
+                <el-card class="LoginPage-el-card-style">
+                    <h1 class="SettingPage-setting-title-style">
+                        注册
+                    </h1>
+                    <el-form>
+                        <el-form-item>
+                            <template v-slot:label>
+                                用户
+                            </template>
+                            <el-input v-model="form.username">
+                                <template #prefix>
+                                    <el-icon><User /></el-icon>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item>
+                            <template v-slot:label>
+                                密码
+                            </template>
+                            <el-input
+                                v-model="form.password"
+                                type="password"
+                                show-password
+                            >
+                                <template #prefix>
+                                    <el-icon><Lock /></el-icon>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                    </el-form>
+                    <div class="SettingPage-input-div-style">
+                        <el-row>
+                            <el-col :span="16"></el-col>
+                            <el-col :span="6">
+                                <el-button
+                                    class="SettingPage-input-button-style"
+                                    type="danger"
+                                    @click="switchSubmit"
+                                >
+                                    注册
+                                </el-button>
+                            </el-col>
+                            <el-col :span="2"></el-col>
+                        </el-row>
+                    </div>
+                </el-card>
+            </div>
+        </el-col>
+        <el-col :span="8"></el-col>
+    </el-row>
+
+    <el-dialog
+        v-model="submitDialogVisible"
+        title="o.0?"
+        width="30%"
+        style="font-weight: bold"
+    >
+        <span>{{ $t("login.bindMail") }}</span>
+        <div class="SignupPage-input-div-style">
+            <el-input
+                v-model="mailInput"
+                :placeholder="messageHoder"
+                type="text"
+                class="SettingPage-el-input-style"
+                clearable
+            >
+            </el-input>
+        </div>
+        <div class="SignupPage-input-div-style">
+            <el-input
+                v-model="codeInput"
+                :placeholder="messageHoder"
+                type="text"
+                class="SettingPage-el-input-style"
+                clearable
+            >
+                <template #append>
+                    <el-button @click="clickSendCode">
+                        提交
+                    </el-button>
+                </template>
+            </el-input>
+        </div>
+
+        <template #footer>
+            <span class="dialog-footer">
+                <el-row>
+                    <el-col :span="10">
+                        <el-button
+                            class="SettingPage-input-button-style"
+                            type="danger"
+                            @click="cancelSign"
+                            >取消</el-button
+                        >
+                    </el-col>
+                    <el-col :span="4"></el-col>
+                    <el-col :span="10">
+                        <el-button
+                            class="SettingPage-input-button-style"
+                            type="danger"
+                            @click="submitSign"
+                            >绑定</el-button
+                        >
+                    </el-col>
+                </el-row>
+            </span>
+        </template>
+    </el-dialog>
+</template>
+
+<script>
+export default
+{
+    name: 'SignupPage',
+    data()
+    {
+        return{
+            paddingTop: "padding-top:" + ((window.innerHeight - 360) / 2) + "px;",
+            form:
+            {
+                username: '',
+                password: '',
+            },
+            submitDialogVisible: false,
+            mailInput: '',
+            codeInput: '',
+        }
+    },
+    mounted()
+    {
+        window.addEventListener('resize',() =>
+            this.paddingTop = "padding-top:" + ((window.innerHeight - 360) / 2) + "px;",
+        )
+    },
+    methods:
+    {
+        switchSubmit()
+        {
+            this.submitDialogVisible = true
+        },
+        clickSendCode()
+        {
+
+        },
+        submitSign()
+        {
+
+        },
+        cancelSign()
+        {
+            this.mailInput = ''
+            this.codeInput = ''
+            this.submitDialogVisible = false
+        },
+        clickBack()
+        {
+            this.$router.push('/Personal')
+        },
+    },
+    created()
+    {
+        setTimeout( () => { this.bottomData = 'bottom: 60px' },100)
+    }
+}
+</script>
+
+<style>
+.SettingPage-image-anger-style
+{
+    width: 256px;
+    position: absolute;
+    left: 0px;
+    transition: 0.5s bottom;
+}
+
+.el-input__wrapper.is-focus
+{
+    box-shadow: 0 0 0 1px #ff8f8f;
+}
+
+.el-input-group__append
+{
+    box-shadow: 0 0 0 1px #ff8f8f;
+}
+
+.SettingPage-input-div-style
+{
+    margin-top: 20px;
+}
+
+.SettingPage-input-button-style
+{
+    width: 100%;
+    background-color: rgba(255,255,255,0.85);
+    font-weight: bold;
+    color: #ff6666;
+}
+
+.SettingPage-setting-title-style
+{
+    color: #ff6666;
+    margin-left: 50px;
+    font-weight: bolder;
+    font-size: 36px;
+    -webkit-text-stroke: 1px #000000;
+
+}
+
+html.dark .SettingPage-input-button-style
+{
+    background-color: rgba(0,0,0,0.85);
+}
+
+html.dark .SettingPage-setting-title-style
+{
+    -webkit-text-stroke: 1px #ffffff;
+}
+
+.SignupPage-input-div-style
+{
+    margin-top: 10px;
+}
+
+.SignupPage-image-anger-style
+{
+    width: 300px;
+    position: absolute;
+    left: 64px;
+    transition: 0.5s bottom;
+}
+
+.LoginPage-el-card-style
+{
+    height: 100%;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.64);
+}
+
+.LoginPage-el-card-style .el-card__body
+{
+    background: rgba(255,255,255,0);
+    background-size: 300px 270px;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+
+.LoginPage-inside-div-style
+{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.LoginPage-title-style
+{
+    text-align: center;
+    color:#ff8888;
+    text-shadow: 0 0 15px #000000;
+}
+
+.el-input__wrapper.is-focus
+{
+    box-shadow: 0 0 0 1px #ff8f8f;
+}
+
+.LoginPage-submit-button-style
+{
+    box-shadow: 0 0 0 1px #000000;
+}
+
+html.dark .LoginPage-el-card-style
+{
+    background: rgba(0,0,0,0.64);
+}
+
+html.dark .el-input__wrapper
+{
+    background-color: #000000;
+}
+
+.vue-auth-box_
+{
+    top: 50%;
+    background: rgba(255,255,255,0.9)
+}
+
+html.dark .vue-auth-box_
+{
+    background: rgba(0,0,0,0.9);
+}
+
+.vue-auth-box_ .auth-control_ .range-box
+{
+    background: #ffffff;
+}
+
+html.dark .vue-auth-box_ .auth-control_ .range-box
+{
+    background: #000000;
+}
+
+.vue-auth-box_ .auth-control_ .range-box .range-slider
+{
+    background: #ff5f5f;
+}
+
+.vue-auth-box_ .auth-control_ .range-box .range-slider .range-btn
+{
+    background-color: #ffffff;
+}
+
+html.dark .vue-auth-box_ .auth-control_ .range-box .range-slider .range-btn
+{
+    background-color: #000000;
+}
+
+.SafetyPage-image-anger-style
+{
+    height: 512px;
+    width: 512px;
+    position: absolute;
+    bottom: 64px;
+    transition: 0.5s left;
+}
+
+.SafetyPage-inside-card-style
+{
+    background: rgba(255,255,255,0);
+    border: solid;
+}
+
+.SafetyPage-inside-card-style .el-card__body
+{
+    background: rgba(255,255,255,0) !important;
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+.SafetyPage-outside-card-style
+{
+    height: 100%;
+    background: rgba(255,255,255,0.64);
+}
+
+.SafetyPage-outside-card-style .el-card__body
+{
+    background: rgba(255,255,255,0);
+    background-size: 300px 270px;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SafetyPage-h3-style
+{
+    margin-left: 10px;
+    font-weight: bolder;
+}
+
+.SafetyPage-button-style
+{
+    width: 100%;
+    background-color: rgba(255,255,255,0.85);
+    font-weight: bold;
+    color: #ff6666;
+}
+
+.SafetyPage-back-button-style
+{
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: rgba(255,255,255,0.64);
+    font-weight: bold;
+    color: #ff6666;
+    position: absolute;
+    z-index: 99;
+}
+
+.SafetyPage-back-icon-style
+{
+    margin-right: 10px;
+}
+
+html.dark .SafetyPage-outside-card-style
+{
+    background-color: rgba(0,0,0,0.85);
+}
+
+html.dark .SafetyPage-button-style
+{
+    background-color: rgba(0,0,0,0.85);
+}
+
+html.dark .SafetyPage-back-button-style
+{
+    background-color: rgba(0,0,0,0.64);
+}
+</style>
