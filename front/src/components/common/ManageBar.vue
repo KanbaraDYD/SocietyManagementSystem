@@ -1,76 +1,34 @@
 <template>
     <el-menu
-        router
         mode="horizontal"
-        background-color="rgba(255,255,255,0.64)"
-        text-color="#222"
+        background-color="rgba(0,0,0,0.8)"
         active-text-color="#ff5f5f"
-        :ellipsis="false"
-        :default-active="defaultActive"
     >
         <el-image
             :src="SRICNavLogo"
             class="NavMenu-SRIC-Navlogo-style"
+            @click="switchSetting()"
         ></el-image>
-        <el-menu-item
-            v-for="(item, i) in navList"
-            :index="item.name"
-            :key="i"
-            class="NavMenu-menu-text-style"
-            >{{ item.navItem }}</el-menu-item
-        >
-        <div class="NavMenu-right-div-style" />
-        <el-tooltip effect="light" placement="bottom">
-            <template #content>
-                <p class="NavMenu-tooltip-p-style">后台管理</p>
-            </template>
-            <el-button
-                @click="switchSetting()"
-                circle
-                size="large"
-                class="NavMenu-el-button-style"
-                style="margin-right: 30px"
-            >
-                <el-icon class="is-loading NavMenu-el-icon-style" size="20px"
-                    ><Setting
-                /></el-icon>
-            </el-button>
-        </el-tooltip>
     </el-menu>
 </template>
 
 <script>
 export default
 {
-    name: 'NavMenu',
-    data ()
+    name: 'ManageBar',
+    data()
     {
-        return {
+        return{
             SRICNavLogo: require('@/assets/images/logo.png'),
-            navList:
-            [
-                {name: 'index', navItem: '首页'},
-                {name: 'society', navItem: '社团'},
-                {name: 'resources', navItem: '资源'},
-                {name: 'forum', navItem: '论坛'},
-                {name: 'personal', navItem: '个人'},
-            ],
-            place: "top:" + (window.innerHeight - 32) + "px;left:" + (window.innerWidth/2 - 173) + "px;",
-            defaultActive: '',
         }
-    },
-    created()
-    {
-        this.defaultActive = this.$route.name;
     },
     methods:
     {
         switchSetting()
         {
-            this.$router.push("/manageIndex")
-        }
-    }
-
+            this.$router.push('/index')
+        },
+    },
 }
 </script>
 
@@ -215,4 +173,5 @@ html.dark .common-el-divider-style
 {
     background-color: #ffffff;
 }
+
 </style>

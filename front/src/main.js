@@ -4,8 +4,10 @@ import router from './router'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as echarts from 'echarts';
 
 const app = createApp(App)
+app.config.globalProperties.$echarts = echarts;
 app.use(router)
 app.use(ElementPlus)
 

@@ -9,7 +9,7 @@
 
 <script>
 import NavMenu from '@/components/common/NavMenu'
-import nightImage from '@/assets/webp/background/night.webp'
+import nightImage from '@/assets/images/background.png'
 
 export default
 {
