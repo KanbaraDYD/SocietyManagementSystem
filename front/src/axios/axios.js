@@ -1,7 +1,6 @@
 import axios from 'axios'
-import qs from 'qs'
 
-axios.defaults.baseURL = 'http://localhost:8443/api'
+axios.defaults.baseURL = 'http://localhost:8088'
 
 export function get(url,params)
 {

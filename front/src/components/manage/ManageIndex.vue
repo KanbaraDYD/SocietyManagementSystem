@@ -62,6 +62,7 @@
 
 <script>
 import gsap from "gsap"
+import { getPageVisited } from "@/axios/api/manage"
 
 export default
 {
@@ -118,10 +119,14 @@ export default
     },
     created()
     {
-        this.visitChangeNumber = 114514
+        var _this = this
+        getPageVisited().then(function(resp){
+            _this.visitChangeNumber = resp.data[0].visit
+            _this.pageChangeNumber = resp.data[1].visit
+        })
+
         this.userChangeNumber = 1145
         this.timeChangeNumber = 66
-        this.pageChangeNumber = 191981
 
         this.chartData = [
             { value: 1048, name: '主页' },

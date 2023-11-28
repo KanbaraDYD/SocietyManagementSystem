@@ -18,7 +18,7 @@ public class CodeGenerator {
      * 数据源配置
      */
     private static final DataSourceConfig.Builder DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://localhost:3306/societymanagementsystem?characterEncoding=UTF-8", "root", "Kan362333")
+            .Builder("jdbc:mysql://localhost:3306/societymanagementsystem?characterEncoding=UTF-8", "root", "admin")
             .dbQuery(new MySqlQuery());
 
     /**
