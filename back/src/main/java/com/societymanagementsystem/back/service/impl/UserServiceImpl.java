@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService
     {
         return mapper.getUserById(id);
     }
+
+    @Override
+    public void sign(user user)
+    {
+        mapper.sign(user);
+    }
 }

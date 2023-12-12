@@ -6,4 +6,5 @@ public interface UserService
 {
     user getUserByName(String username);
     user getUserById(int id);
+    void sign(user user);
 }

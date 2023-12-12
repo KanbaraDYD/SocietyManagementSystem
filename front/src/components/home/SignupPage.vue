@@ -134,7 +134,8 @@ export default
             this.$refs['form'].validate((valid) => {
                 if(valid)
                 {
-                    sign({ username: this.form.username,password: this.form.password }).then(function(resp){
+                    var _this = this
+                    sign({ username: this.form.username,password: this.form.password,phoneNumber: this.form.phoneNumber,email: this.form.email }).then(function(resp){
                         if(resp.data.code == 200)
                         {
                             _this.$message.success({message: "注册成功",})

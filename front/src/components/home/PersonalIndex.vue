@@ -118,7 +118,6 @@ export default
                     _this.mark = resp.data.mark
             })
         }
-        setTimeout( () => { this.leftData = 'left: 0px' },100)
     },
 }
 </script>

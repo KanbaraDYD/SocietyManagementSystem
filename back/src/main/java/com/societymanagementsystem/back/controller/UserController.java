@@ -47,6 +47,8 @@ public class UserController
         code code = new code();
         if(u == null)
         {
+            user.setMark("NULL");
+            service.sign(user);
             code.setCode(200);
             return code;
         }
