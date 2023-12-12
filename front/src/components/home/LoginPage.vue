@@ -15,8 +15,8 @@
                 <el-card class="LoginPage-el-card-style" :style="active">
                     <div class="LoginPage-inside-div-style">
                         <h1 class="LoginPage-title-style">登录</h1>
-                        <el-form>
-                            <el-form-item>
+                        <el-form :model="form" :rules="rules" ref="form">
+                            <el-form-item prop="username">
                                 <template v-slot:label>
                                     用户
                                 </template>
@@ -26,7 +26,7 @@
                                     </template>
                                 </el-input>
                             </el-form-item>
-                            <el-form-item>
+                            <el-form-item prop="password">
                                 <template v-slot:label>
                                     密码
                                 </template>
@@ -75,6 +75,11 @@ export default
                 password: '',
             },
             active: '',
+            rules:
+            {
+                username: [{required: true, message: '不能为空'}],
+                password: [{required: true, message: '不能为空'}],
+            },
         }
     },
     methods:
@@ -89,25 +94,34 @@ export default
         },
         clickLogin()
         {
-            var _this = this
-            login({ username: this.form.username,password: this.form.password }).then(function(resp){
-                if(resp.data.code == 200)
+            this.$refs['form'].validate((valid) => {
+                if(valid)
                 {
-                    _this.$message.success({message: "登录成功",})
-                    localStorage.setItem('userId',resp.data.id)
-                    _this.$router.push('/Personal')
-                }
-                else if(resp.data.code == 400)
-                {
-                    _this.$message.error({message: "密码错误",})
-                }
-                else if(resp.data.code == 401)
-                {
-                    _this.$message.warning({message: "用户不存在",})
+                    var _this = this
+                    login({ username: this.form.username,password: this.form.password }).then(function(resp){
+                        if(resp.data.code == 200)
+                        {
+                            _this.$message.success({message: "登录成功",})
+                            localStorage.setItem('userId',resp.data.id)
+                            _this.$router.push('/Personal')
+                        }
+                        else if(resp.data.code == 400)
+                        {
+                            _this.$message.error({message: "密码错误",})
+                        }
+                        else if(resp.data.code == 401)
+                        {
+                            _this.$message.warning({message: "用户不存在",})
+                        }
+                        else
+                        {
+                            _this.$message.error({message: "服务器错误",})
+                        }
+                    })
                 }
                 else
                 {
-                    _this.$message.error({message: "服务器错误",})
+                    return
                 }
             })
         },

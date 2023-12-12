@@ -16,8 +16,8 @@
                     <h1 class="SettingPage-setting-title-style">
                         注册
                     </h1>
-                    <el-form>
-                        <el-form-item>
+                    <el-form :model="form" :rules="rules" ref="form">
+                        <el-form-item prop="username">
                             <template v-slot:label>
                                 用户
                             </template>
@@ -27,7 +27,27 @@
                                 </template>
                             </el-input>
                         </el-form-item>
-                        <el-form-item>
+                        <el-form-item prop="phoneNumber">
+                            <template v-slot:label>
+                                手机
+                            </template>
+                            <el-input v-model="form.phoneNumber">
+                                <template #prefix>
+                                    <el-icon><User /></el-icon>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item prop="email">
+                            <template v-slot:label>
+                                邮箱
+                            </template>
+                            <el-input v-model="form.email">
+                                <template #prefix>
+                                    <el-icon><User /></el-icon>
+                                </template>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item prop="password">
                             <template v-slot:label>
                                 密码
                             </template>
@@ -77,11 +97,28 @@ export default
             form:
             {
                 username: '',
+                phoneNumber: '',
+                email: '',
                 password: '',
             },
             submitDialogVisible: false,
             mailInput: '',
             codeInput: '',
+            rules:
+            {
+                username: [{required: true, message: '不能为空'}],
+                phoneNumber: 
+                [
+                    {required: true, message: '不能为空'},
+                    {pattern: /^1[3-9]\d{9}$/, message: '请输入正确的手机号', trigger: ['blur', 'change']}
+                ],
+                email:
+                [
+                    {required: true, message: '不能为空'},
+                    {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                ],
+                password: [{required: true, message: '不能为空'}],
+            },
         }
     },
     mounted()
@@ -94,20 +131,28 @@ export default
     {
         switchSubmit()
         {
-            var _this = this
-            sign({ username: this.form.username,password: this.form.password }).then(function(resp){
-                if(resp.data.code == 200)
+            this.$refs['form'].validate((valid) => {
+                if(valid)
                 {
-                    _this.$message.success({message: "注册成功",})
-                    _this.$router.push('/Login')
-                }
-                else if(resp.data.code == 400)
-                {
-                    _this.$message.error({message: "用户名已被注册",})
+                    sign({ username: this.form.username,password: this.form.password }).then(function(resp){
+                        if(resp.data.code == 200)
+                        {
+                            _this.$message.success({message: "注册成功",})
+                            _this.$router.push('/Login')
+                        }
+                        else if(resp.data.code == 400)
+                        {
+                            _this.$message.error({message: "用户名已被注册",})
+                        }
+                        else
+                        {
+                            _this.$message.error({message: "服务器错误",})
+                        }
+                    })
                 }
                 else
                 {
-                    _this.$message.error({message: "服务器错误",})
+                    return
                 }
             })
         },
