@@ -29,6 +29,7 @@ public class UserController
             if(u.getPassword().equals(user.getPassword())) //密码正确
             {
                 code.setCode(200);
+                code.setId(u.getId());
                 return code;
             }
             else //密码错误
@@ -54,5 +55,11 @@ public class UserController
             code.setCode(400);
             return code;
         }
+    }
+
+    @GetMapping("/getUserById")
+    public user getUserById(int id)
+    {
+        return service.getUserById(id);
     }
 }

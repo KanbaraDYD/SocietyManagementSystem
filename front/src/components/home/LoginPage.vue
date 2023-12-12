@@ -38,7 +38,7 @@
                             </el-form-item>
                             <el-form-item>
                                 <el-button 
-                                @click="login"
+                                @click="clickLogin"
                                 size="small" 
                                 class="LoginPage-submit-button-style" 
                                 style="margin-left:40px" 
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import { login } from '@/axios/api/user'
+
 export default
 {
     name: 'LoginPage',
@@ -85,9 +87,29 @@ export default
         {
             this.active = ''
         },
-        login()
+        clickLogin()
         {
-            this.isShow = true
+            var _this = this
+            login({ username: this.form.username,password: this.form.password }).then(function(resp){
+                if(resp.data.code == 200)
+                {
+                    _this.$message.success({message: "登录成功",})
+                    localStorage.setItem('userId',resp.data.id)
+                    _this.$router.push('/Personal')
+                }
+                else if(resp.data.code == 400)
+                {
+                    _this.$message.error({message: "密码错误",})
+                }
+                else if(resp.data.code == 401)
+                {
+                    _this.$message.warning({message: "用户不存在",})
+                }
+                else
+                {
+                    _this.$message.error({message: "服务器错误",})
+                }
+            })
         },
         clickBack()
         {

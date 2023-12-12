@@ -7,7 +7,7 @@
     <div class="PersonalIndex-affix-div-style">
         <el-affix>
             <el-button 
-            v-if="tokenValue == null"
+            v-if="userId == null"
             @click="switchLogin"
             color="#ff6666" 
             class="PersonalIndex-affix-button-style" 
@@ -16,7 +16,7 @@
             登录
             </el-button>
             <el-button 
-            v-if="tokenValue == null"
+            v-if="userId == null"
             @click="switchSignup"
             color="#ff6666" 
             class="PersonalIndex-affix-button-style" 
@@ -25,13 +25,13 @@
             注册
             </el-button>
             <el-button 
-            v-if="tokenValue != null"
-            @click="switchSetting"
+            v-if="userId != null"
+            @click="switchQuit"
             color="#ff6666" 
             class="PersonalIndex-affix-button-style" 
             plain>
             <el-icon class="PersonalIndex-affix-icon-style"><Operation/></el-icon>
-            选项
+            退出登录
             </el-button>
         </el-affix>
     </div>
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { getUserById } from '@/axios/api/user'
+
 export default
 {
     name: 'RersonalIndex',
@@ -72,7 +74,7 @@ export default
                 },
             ],
             mark: "请先登录以查看个人信息",
-            tokenValue: localStorage.getItem('tokenValue'),
+            userId: localStorage.getItem('userId'),
             leftData: 'left: -400px',
         }
     },
@@ -83,10 +85,14 @@ export default
             this.leftData = 'left: -500px'
             setTimeout( () => { this.$router.push('/Login') },256)//延迟跳转 播放动画
         },
-        switchSetting()
+        switchQuit()
         {
             this.leftData = 'left: -500px'
-            setTimeout( () => { this.$router.push('/Setting') },256)//延迟跳转 播放动画
+            localStorage.removeItem('userId')
+            this.$message.success({message: "退出成功",})
+            this.username = '未登录'
+            this.mark = "请先登录以查看个人信息"
+
         },
         switchSignup()
         {
@@ -101,50 +107,18 @@ export default
             this.paddingTop = "padding-top:" + ((window.innerHeight - 360) / 2) + "px;",
         )
     },
-    // created()
-    // {
-    //     if(this.tokenValue != null)
-    //     {
-    //         var _this = this
-    //         getUserByToken({ tokenValue: this.tokenValue }).then(function(resp){
-    //                 _this.username = resp.data.username
-    //                 _this.avatar = resp.data.avatar
-    //                 _this.mark = resp.data.mark
-    //                 _this.$store.commit('setUsername',resp.data.username)
-    //                 _this.$store.commit('setAvatar',resp.data.avatar)
-    //                 _this.$store.commit('setMark',resp.data.mark)
-    //                 _this.$store.commit('setStatus',resp.data.status)
-    //         })
-    //         getTagByToken({ tokenValue: this.tokenValue }).then(function(resp){
-    //                 _this.tags = resp.data
-    //                 _this.$store.commit('setTags',resp.data)
-    //         })
-    //     }
-    //     else
-    //     {
-    //         this.username = t('login.mark1')
-    //         this.mark = t('login.mark2')
-    //         this.tags = 
-    //         [
-    //             {
-    //                 content: "neko",
-    //             },
-    //             {
-    //                 content: "nia",
-    //             },
-    //             {
-    //                 content: "miao",
-    //             },
-    //             {
-    //                 content: "wu nia",
-    //             },
-    //             {
-    //                 content: "www",
-    //             },
-    //         ]
-    //     }
-    //     setTimeout( () => { this.leftData = 'left: 0px' },100)
-    // },
+    created()
+    {
+        if(this.userId != null)
+        {
+            var _this = this
+            getUserById({ id: this.userId }).then(function(resp){
+                    _this.username = resp.data.username
+                    _this.mark = resp.data.mark
+            })
+        }
+        setTimeout( () => { this.leftData = 'left: 0px' },100)
+    },
 }
 </script>
 
