@@ -92,6 +92,7 @@ export default
             this.$message.success({message: "退出成功",})
             this.username = '未登录'
             this.mark = "请先登录以查看个人信息"
+            userId = null
 
         },
         switchSignup()

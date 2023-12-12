@@ -62,67 +62,11 @@
         </el-col>
         <el-col :span="8"></el-col>
     </el-row>
-
-    <el-dialog
-        v-model="submitDialogVisible"
-        title="o.0?"
-        width="30%"
-        style="font-weight: bold"
-    >
-        <span>{{ $t("login.bindMail") }}</span>
-        <div class="SignupPage-input-div-style">
-            <el-input
-                v-model="mailInput"
-                :placeholder="messageHoder"
-                type="text"
-                class="SettingPage-el-input-style"
-                clearable
-            >
-            </el-input>
-        </div>
-        <div class="SignupPage-input-div-style">
-            <el-input
-                v-model="codeInput"
-                :placeholder="messageHoder"
-                type="text"
-                class="SettingPage-el-input-style"
-                clearable
-            >
-                <template #append>
-                    <el-button @click="clickSendCode">
-                        提交
-                    </el-button>
-                </template>
-            </el-input>
-        </div>
-
-        <template #footer>
-            <span class="dialog-footer">
-                <el-row>
-                    <el-col :span="10">
-                        <el-button
-                            class="SettingPage-input-button-style"
-                            type="danger"
-                            @click="cancelSign"
-                            >取消</el-button
-                        >
-                    </el-col>
-                    <el-col :span="4"></el-col>
-                    <el-col :span="10">
-                        <el-button
-                            class="SettingPage-input-button-style"
-                            type="danger"
-                            @click="submitSign"
-                            >绑定</el-button
-                        >
-                    </el-col>
-                </el-row>
-            </span>
-        </template>
-    </el-dialog>
 </template>
 
 <script>
+import { sign } from '@/axios/api/user'
+
 export default
 {
     name: 'SignupPage',
@@ -150,21 +94,22 @@ export default
     {
         switchSubmit()
         {
-            this.submitDialogVisible = true
-        },
-        clickSendCode()
-        {
-
-        },
-        submitSign()
-        {
-
-        },
-        cancelSign()
-        {
-            this.mailInput = ''
-            this.codeInput = ''
-            this.submitDialogVisible = false
+            var _this = this
+            sign({ username: this.form.username,password: this.form.password }).then(function(resp){
+                if(resp.data.code == 200)
+                {
+                    _this.$message.success({message: "注册成功",})
+                    _this.$router.push('/Login')
+                }
+                else if(resp.data.code == 400)
+                {
+                    _this.$message.error({message: "用户名已被注册",})
+                }
+                else
+                {
+                    _this.$message.error({message: "服务器错误",})
+                }
+            })
         },
         clickBack()
         {
