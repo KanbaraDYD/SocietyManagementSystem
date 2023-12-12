@@ -49,7 +49,7 @@ export default
             SRICNavLogo: require('@/assets/images/logo.png'),
             navList:
             [
-                {name: 'index', navItem: '首页'},
+                {name: '/', navItem: '首页'},
                 {name: 'society', navItem: '社团'},
                 {name: 'resources', navItem: '资源'},
                 {name: 'forum', navItem: '论坛'},
