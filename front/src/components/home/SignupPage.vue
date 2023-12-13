@@ -21,7 +21,7 @@
                             <template v-slot:label>
                                 用户
                             </template>
-                            <el-input v-model="form.username">
+                            <el-input v-model="form.username"  id="UsernameInput2">
                                 <template #prefix>
                                     <el-icon><User /></el-icon>
                                 </template>
@@ -31,7 +31,7 @@
                             <template v-slot:label>
                                 手机
                             </template>
-                            <el-input v-model="form.phoneNumber">
+                            <el-input v-model="form.phoneNumber"  id="PhoneInput">
                                 <template #prefix>
                                     <el-icon><User /></el-icon>
                                 </template>
@@ -41,7 +41,7 @@
                             <template v-slot:label>
                                 邮箱
                             </template>
-                            <el-input v-model="form.email">
+                            <el-input v-model="form.email"  id="EmailInput">
                                 <template #prefix>
                                     <el-icon><User /></el-icon>
                                 </template>
@@ -55,6 +55,7 @@
                                 v-model="form.password"
                                 type="password"
                                 show-password
+                                id="PasswordInput"
                             >
                                 <template #prefix>
                                     <el-icon><Lock /></el-icon>
